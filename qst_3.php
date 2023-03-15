@@ -6,9 +6,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">                
-                <div class="col-md-6 offset-md-3 text-center bg-dark text-white fs-5">
+                <div class="col-md-6 offset-md-3 text-center bg-dark text-white fs-5 p-2">
                     <p class="fs-3">Sistema Gerador de Boleto</p>
                     <form action="" method="POST">
                         <div class="row p-2">
@@ -68,27 +68,30 @@
                 $mes = (int) $_POST['mes'];
                 $valorMensal = ($valor / $parcelas);
         ?>
-                <div class="container col-md-6 offset-md-3 mt-5">
+                <div class="container-fluid col-md-6 offset-md-3 mt-5">
                     <table class="table table-hover table-bordered table-striped">
+                        <tr class="text-center bg-dark fs-4">
+                            <td class="text-white" colspan=3> <?php echo "Valor: R$ ".number_format($valor, 2, '.', ''); ?> </td>
+                        </tr>
                         <tr class="text-center bg-success text-white fs-5">
                             <td>Vencimento</td>
                             <td>Parcela</td>
                             <td>Valor</td>
                         </tr>
                         <?php for($i = 0; $i < $parcelas; $i++): ?>
-                            <tr class="text-center">
-                                <td>
-                                    <?php
-                                    echo mes($mes);
-                                    $mes += 1;
-                                    if ($mes == 13) {
-                                        $mes = 1;
-                                    } 
-                                    ?>
-                                </td>
-                                <td><?php echo $i+1; ?></td>
-                                <td><?php echo number_format($valorMensal, 2, '.', ''); ?></td>
-                            </tr>
+                        <tr class="text-center">
+                            <td>
+                                <?php
+                                echo mes($mes);
+                                $mes += 1;
+                                if ($mes == 13) {
+                                    $mes = 1;
+                                } 
+                                ?>
+                            </td>
+                            <td><?php echo $i+1; ?></td>
+                            <td><?php echo "R$ ".number_format($valorMensal, 2, '.', ''); ?></td>
+                        </tr>
                         <?php endfor; ?>
                     </table>
                 </div>
