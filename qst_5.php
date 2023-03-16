@@ -14,13 +14,22 @@
                         <div class="col">
                             <?php
                             $numbers = array();
+                            $cont = 0;
 
                             while (count($numbers) != 6) {
-                                $n = rand(1,60);
-                                if (!in_array($n, $numbers, true)) {   
-                                    array_push($numbers,$n);
+                                $sort = rand(1,60);
+                                for ($i = 0; $i < count($numbers); $i++) {
+                                    if ($sort == $numbers[$i]) {
+                                        $cont++;
+                                        break;
+                                    }
                                 }
+                                if ($cont == 0) 
+                                    array_push($numbers,$sort);
+
+                                $cont = 0; 
                             }
+
                             sort($numbers);
                             foreach ($numbers as $number) {
                             ?>
