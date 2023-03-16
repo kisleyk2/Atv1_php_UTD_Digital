@@ -15,18 +15,10 @@
                                 <input type="text" name="v1" class="form-control v1" id="v1">
                             </div>
                             <div class="col">   
-                                <select name="op" class="btn border border-3" id="op">
-                                    <option></option>
-                                    <option value="+">+</option>
-                                    <option value="-">-</option>
-                                    <option value="/">/</option>
-                                    <option value="*">x</option>
-                                    <option value="r">&radic;</option>
-                                    <option value="e">x^y</option>
-                                </select>
+                                <input type="text" name="opc" class="form-control v1" id="v2">
                             </div>
                             <div class="col border-3">
-                                <input type="text" name="v2" class="form-control v2" id="v2">
+                                <input type="text" name="v2" class="form-control v2" id="v3">
                             </div>
                             <div class="col border-3">
                                 <button class="btn btn-dark form-control result">?</button>
@@ -34,7 +26,7 @@
                         </div>
                         <div class="row border border-dark">                            
                             <div class="col-12 bt= p-2">
-                                <button type="submit" class="btn btn-success btn-9 form-control" onclick="insert('=')">
+                                <button type="submit" class="btn btn-success btn-9 form-control">
                                     <span class="iconify" data-icon="material-symbols:equal"></span>
                                 </button>
                             </div>                                                 
@@ -47,7 +39,7 @@
                             </button>
                         </div>     
                         <div class="col-6 bt=">
-                            <button id="bt" type="button" value="true" onclick="getfocus(value)" class="btn btn-dark btn-9 form-control">
+                            <button id="bt" type="button" value="1" onclick="getfocus(value)" class="btn btn-dark btn-9 form-control">
                                 <span class="iconify" data-icon="icon-park-solid:reverse-operation-out"></span>
                             </button>
                         </div>
@@ -56,7 +48,7 @@
                         <div class="col"><button class="btn btn-success bt9" value="9" onclick="insert('9')">9</button></div>
                         <div class="col"><button class="btn btn-success bt8" value="8" onclick="insert('8')">8</button></div>
                         <div class="col"><button class="btn btn-success bt7" value="7" onclick="insert('7')">7</button></div>
-                        <div class="col"><button class="btn btn-success bt/" value="/">/</button></div>
+                        <div class="col"><button class="btn btn-success bt/" value="/" onclick="insert('/')">/</button></div>
                     </div>
                     <div class="row border border-dark p-2">
                         <div class="col"><button class="btn btn-success bt6" value="6" onclick="insert('6')">6</button></div>
@@ -73,12 +65,12 @@
                     <div class="row  border border-dark p-2">
                         <div class="col"><button class="btn btn-success bt0" value="0" onclick="insert('0')">0</button></div>
                         <div class="col">
-                            <button class="btn btn-success btr">
+                            <button class="btn btn-success btr" value="r" onclick="insert('sqrt')">
                                 <span class="iconify" data-icon="la:square-root-alt"></span>
                             </button>
                         </div>
                         <div class="col">
-                            <button class="btn btn-success btex">
+                            <button class="btn btn-success btex" value="e" onclick="insert('^')">
                                 <span class="iconify" data-icon="mdi:exponent"></span>
                             </button>
                         </div> 
@@ -89,68 +81,86 @@
         </div>        
 
         <script>
-            var cod = true;
+            var v1 = document.querySelector("#v1");
+            var v2 = document.querySelector("#v2");
+            var v3 = document.querySelector("#v3");
+
+            var cod = '1';
             function getfocus(c) {
-                c = Boolean(c);
-                if (c == true) 
-                    document.getElementById('v1').focus();                    
-                else 
-                    document.getElementById('v2').focus();
+                if (c == '1') 
+                    v1.focus();                    
+                else if (c == '2')
+                    v2.focus();
+                else
+                    v3.focus();
                 
-                c = !c;        
+                if (c < 3)
+                    c = Number(c) + 1;
+                else
+                    c = '1';
+
                 document.getElementById('bt').value = String(c);
-                cod = !cod;                
+                cod = c;                
             }
 
             function insert(dig) {
-                if (cod == true)
-                    document.getElementById('v1').value += dig;
-                else 
-                    document.getElementById('v2').value += dig;
+                if (cod == '1')
+                    v1.value += dig;
+                else if (cod == '2')
+                    v2.value += dig;
+                else {
+                    v3.value += dig;
+                }
+
+                if (v2.value == 'sqrt')
+                    v3.value = '0';
+                
             }
             
             var inputText;
             var reset = window.document.querySelector("#reset");
             
             reset.addEventListener("click", function() {
-                if (cod == true) {
-                    inputText = window.document.querySelector("#v1");
-                    if(inputText.value.length){
-                        inputText.value = inputText.value.substr(0, inputText.value.length -1);
-                        inputText.focus();
-                    }
-                } else {
-                    inputText = window.document.querySelector("#v2");
-                    if(inputText.value.length){
-                        inputText.value = inputText.value.substr(0, inputText.value.length -1);
-                        inputText.focus();
-                    }
-                }                
+                let op;
+
+                if (cod == '1') 
+                    op = '1';
+                else if (cod == '2')
+                    op = '2';
+                else
+                    op = '3';
+
+                inputText = window.document.querySelector(`#v${op}`);
+                if(inputText.value.length){
+                    inputText.value = inputText.value.substr(0, inputText.value.length -1);
+                    inputText.focus();
+                }
+                                   
             });           
         </script>
 
         <?php
             if (isset($_POST['v1'])){
                 $v1 = (int) $_POST['v1'];
-                $op = $_POST['op'];
+                $opc = $_POST['opc'];
                 $v2 = (int) $_POST['v2'];
-                
-                if ($op == '+') {
+
+                if ($opc == '+') {
                     $result = $v1 + $v2;
                 } 
-                if ($op == '-') {
+                if ($opc == '-') {
                     $result = $v1 - $v2;
                 }
-                if ($op == '/') {
+                if ($opc == '/') {
                     $result = $v1 / $v2;
                 }
-                if ($op == '*') {
+                if ($opc == '*') {
                     $result = $v1 * $v2;
                 }
-                if ($op == 'r') {
+                if ($opc == 'sqrt') {
                     $result = sqrt($v1);
                 }
-                if ($op == 'e') {
+                if ($opc == '^') {
                     $result = pow($v1,$v2);
                 }
                 
