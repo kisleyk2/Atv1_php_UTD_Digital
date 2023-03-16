@@ -83,7 +83,7 @@
             var op = document.querySelector('.op');
             var result = document.querySelector('.result');
             
-
+            /* Em Construção... */
             if (!v1.focus()) {
                 function insert(dig) {
                     v1.value += dig;
