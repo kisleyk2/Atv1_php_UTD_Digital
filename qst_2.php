@@ -14,8 +14,16 @@
                             <div class="col border-3 border-dark">
                                 <input type="text" name="v1" class="form-control v1" id="v1">
                             </div>
-                            <div class="col border-3">
-                                <input type="text" name="op" class="form-control op" maxlength="1">
+                            <div class="col">   
+                                <select name="op" class="btn border border-3">
+                                    <option></option>
+                                    <option value="+">+</option>
+                                    <option value="-">-</option>
+                                    <option value="/">/</option>
+                                    <option value="*">x</option>
+                                    <option value="r">&radic;</option>
+                                    <option value="e">x^y</option>
+                                </select>
                             </div>
                             <div class="col border-3">
                                 <input type="text" name="v2" class="form-control v2">
@@ -109,6 +117,12 @@
                 if ($op == '*') {
                     $result = $v1 * $v2;
                 }
+                if ($op == 'r') {
+                    $result = sqrt($v1);
+                }
+                if ($op == 'e') {
+                    $result = pow($v1,$v2);
+                }
                 
         ?>
                 <script>                
@@ -117,5 +131,7 @@
         <?php
             }
         ?>
+
+        <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
     </body>
-</html>
+</html> 
