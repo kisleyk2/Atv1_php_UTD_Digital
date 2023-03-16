@@ -9,6 +9,7 @@
         <form>
             <table class="col-form text-center">
                 <?php
+                $cont = 0;
                 $numbers = array();
                 for ($i = 0; $i < 11; $i++) {
                     $n = rand(1,100);
@@ -18,7 +19,8 @@
                     <td><input type="text" name="num" value="<?php echo $n?>" class="form-control text-center"></td>
                 <tr>
                 <?php
-                    array_push($numbers,$n);                
+                    $numbers[$cont] = $n;
+                    $cont++;                
                 }
                 ?>
                 <tr>
