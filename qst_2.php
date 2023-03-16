@@ -55,11 +55,16 @@
                             </div>                            
                         </div>
                         <div class="row border border-dark">
-                            <div class="col-12 bt=">
+                            <div class="col-6 bt=">
+                                <button id="bt" type="button" value="true" onclick="getfocus(value)" class="btn btn-success btn-9">
+                                    <span class="iconify" data-icon="icon-park-solid:reverse-operation-out"></span>
+                                </button>
+                            </div>
+                            <div class="col-6 bt=">
                                 <button type="submit" class="btn btn-success btn-9" onclick="insert('=')">
                                     <span class="iconify" data-icon="material-symbols:equal"></span>
                                 </button>
-                            </div>
+                            </div>                                                        
                         </div>                        
                     </form>
                     <div class="row border border-dark">
@@ -96,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <button id="bt" type="button" value="true" onclick="getfocus(value)">V</button>
+            
 
         </div>
         <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
