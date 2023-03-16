@@ -28,6 +28,9 @@
                             <?php
                             }
                             ?>
+                            <a href="JavaScript:location.reload(true);">
+                                <button class="btn btn-warning m-4">Gerar</button>
+                            </a>
                         </div>
                     </div>
                 </div>
