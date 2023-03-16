@@ -4,6 +4,28 @@
         <meta charset="UTF-8">
         <title>Quest 2</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+        <script type="text/javascript">
+            var cod = true;
+            function getfocus(c) {
+                c = Boolean(c);
+                if (c == true) {
+                    document.getElementById('v1').focus();                    
+                } else {
+                    document.getElementById('v2').focus();
+                }
+                c = !c;        
+                document.getElementById('bt').value = String(c);
+                cod = !cod;                
+            }
+
+            function insert(dig) {
+                if (cod == true)
+                    document.getElementById('v1').value += dig;
+                else {
+                    document.getElementById('v2').value += dig;
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="container">
@@ -15,7 +37,7 @@
                                 <input type="text" name="v1" class="form-control v1" id="v1">
                             </div>
                             <div class="col">   
-                                <select name="op" class="btn border border-3">
+                                <select name="op" class="btn border border-3" id="op">
                                     <option></option>
                                     <option value="+">+</option>
                                     <option value="-">-</option>
@@ -26,7 +48,7 @@
                                 </select>
                             </div>
                             <div class="col border-3">
-                                <input type="text" name="v2" class="form-control v2">
+                                <input type="text" name="v2" class="form-control v2" id="v2">
                             </div>
                             <div class="col border-3">
                                 <button class="btn btn-success form-control result">?</button>
@@ -74,29 +96,16 @@
                     </div>
                 </div>
             </div>
+            <button id="bt" type="button" value="true" onclick="getfocus(value)">V</button>
 
         </div>
         <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
         <script>
             var v1 = document.querySelector('.v1');
             var v2 = document.querySelector('.v2');
             var op = document.querySelector('.op');
             var result = document.querySelector('.result');
-            
-            /* Em Construção... */
-            if (!v1.focus()) {
-                function insert(dig) {
-                    v1.value += dig;
-                }
-            } else if (!op.focus()) {
-                function insert(dig) {
-                    op.value = dig;
-                }
-            } else if (!v2.focus()) {
-                function insert(dig) {
-                    v2.value = dig;
-                }
-            }
         </script>
 
         <?php
