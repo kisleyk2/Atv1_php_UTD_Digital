@@ -66,6 +66,7 @@
                 $valor = $_POST['valor'];
                 $parcelas = $_POST['parcelas'];
                 $mes = (int) $_POST['mes'];
+                $ano = 2023;
                 $valorMensal = ($valor / $parcelas);
         ?>
                 <div class="container-fluid col-md-6 offset-md-3 mt-5">
@@ -82,10 +83,11 @@
                         <tr class="text-center">
                             <td>
                                 <?php
-                                echo mes($mes);
+                                echo mes($mes)." de $ano";
                                 $mes += 1;
                                 if ($mes == 13) {
                                     $mes = 1;
+                                    $ano++;
                                 } 
                                 ?>
                             </td>
