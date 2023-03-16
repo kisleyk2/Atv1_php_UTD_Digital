@@ -116,6 +116,7 @@
 
                 if (opc.value == 'sqrt')
                     v2.value = '0';
+                    
             }
             
             var inputText;
@@ -126,14 +127,17 @@
 
                 if (cod == '1') 
                     op = '1';
-                else 
+                else if (cod == '2')
                     op = '2';
+                else
+                    op = '3';
 
                 inputText = window.document.querySelector(`#v${op}`);
                 if(inputText.value.length){
                     inputText.value = inputText.value.substr(0, inputText.value.length -1);
                     inputText.focus();
-                }                                   
+                }
+                                   
             });           
         </script>
 
@@ -159,7 +163,12 @@
                     $result = sqrt($v1);
                 }
                 if ($opc == '^') {
-                    $result = pow($v1,$v2);
+                    #$result = pow($v1,$v2);
+                    $tot = 1;
+                    for ($i = 0; $i < $v2; $i++) 
+                        $tot *= $v1;
+
+                    $result = $tot;
                 }
                 
         ?>
